@@ -1,7 +1,7 @@
 document.getElementById("wishButton").addEventListener("click", function () {
   document.getElementById("message").textContent = "Загрузка ...";
 
-  const apiKey = "sk-proj-uYQtiCBvLz4xSufIYOXAT3BlbkFJkgPR1B8peVLEewgNf2At";
+  const apiKey = process.env.OPEN_AI_API;
 
   const apiUrl = "https://api.openai.com/v1/chat/completions";
 
