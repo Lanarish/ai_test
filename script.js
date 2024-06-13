@@ -1,33 +1,8 @@
 document.getElementById("wishButton").addEventListener("click", function () {
   document.getElementById("message").textContent = "Загрузка ...";
 
-  const apiKey = process.env.OPEN_AI_API;
-
-  const apiUrl = "https://api.openai.com/v1/chat/completions";
-
-  // Тело запроса
-  const requestData = {
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "user",
-        content: "Пожелание на день, ограниченное 100 символами",
-      },
-    ],
-  };
-
-  // Настройки запроса
-  const requestOptions = {
-    method: "POST", // метод запроса HTTP
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify(requestData),
-  };
-
-  // Выполняем запрос с помощью fetch
-  fetch(apiUrl, requestOptions)
+  // Выполняем запрос к нашему API-роуту
+  fetch("/api/wish", { method: "POST" })
     .then((response) => response.json())
     .then((data) => {
       if (data.choices && data.choices.length > 0) {
