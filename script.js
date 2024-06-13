@@ -5,6 +5,7 @@ document.getElementById("wishButton").addEventListener("click", function () {
   fetch("/api/wish", { method: "POST" })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data); // Отладочный вывод данных ответа
       if (data.choices && data.choices.length > 0) {
         const message = data.choices[0].message.content;
         document.getElementById("message").textContent = message;
