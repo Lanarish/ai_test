@@ -7,7 +7,9 @@ export default async function handler(req, res) {
   const apiKey = process.env.OPEN_AI_API;
 
   if (!apiKey) {
-    res.status(500).json({ message: "API key is missing" });
+    res
+      .status(500)
+      .json({ message: "API key is missing or not configured properly" });
     return;
   }
 
@@ -35,7 +37,6 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(apiUrl, requestOptions);
     if (!response.ok) {
-      // Если ответ не ok, выводим дополнительную информацию
       const errorData = await response.text();
       console.error("Error from OpenAI API:", response.status, errorData);
       res
@@ -44,7 +45,7 @@ export default async function handler(req, res) {
       return;
     }
     const data = await response.json();
-    console.log("Data received from OpenAI API:", data); // Отладочный вывод на сервере
+    console.log("Data received from OpenAI API:", data);
     res.status(200).json(data);
   } catch (error) {
     console.error("Error during API request:", error);
